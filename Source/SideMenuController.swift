@@ -310,6 +310,17 @@ public class SideMenuController: UIViewController, UIGestureRecognizerDelegate {
             self.centerViewController.view.userInteractionEnabled = !reveal
             if updated {
                 let delegateMethod = reveal ? self.delegate?.sideMenuControllerDidReveal : self.delegate?.sideMenuControllerDidHide
+				if let sideDelegate = self.sideViewController as? SideMenuControllerDelegate {
+					let sideDelegateMethod = reveal ? sideDelegate.sideMenuControllerDidReveal :
+													  sideDelegate.sideMenuControllerDidHide
+						sideDelegateMethod(self)
+				}
+
+				if let centerDelegate = self.centerViewController as? SideMenuControllerDelegate {
+					let centerDelegateMethod = reveal ? centerDelegate.sideMenuControllerDidReveal :
+														centerDelegate.sideMenuControllerDidHide
+					centerDelegateMethod(self)
+				}
                 delegateMethod?(self)
             }
         }
