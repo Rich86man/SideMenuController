@@ -29,13 +29,13 @@ import Foundation
  *  added to the center panel and resized. You only need to implement a custom animation.
  */
 public protocol TransitionAnimatable {
-    static func performTransition(forView view: UIView, completion: (() -> Void))
+    static func performTransition(forView view: UIView, completion: @escaping (() -> Void))
 }
 
 
 public struct FadeAnimator: TransitionAnimatable {
     
-    public static func performTransition(forView view: UIView, completion: (() -> Void)) {
+    public static func performTransition(forView view: UIView, completion: @escaping (() -> Void)) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
         let fadeAnimation = CABasicAnimation(keyPath: "opacity")
@@ -51,7 +51,7 @@ public struct FadeAnimator: TransitionAnimatable {
 
 public struct CircleMaskAnimator: TransitionAnimatable {
     
-    public static func performTransition(forView view: UIView, completion: (() -> Void)) {
+    public static func performTransition(forView view: UIView, completion: @escaping (() -> Void)) {
         CATransaction.begin()
         CATransaction.setCompletionBlock(completion)
         
